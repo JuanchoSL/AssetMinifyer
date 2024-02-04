@@ -52,6 +52,7 @@ class CSSMin implements MinifyerInterface
         foreach ([': ', '{ ', ' }', '; ', ' :', ' {', '} ', ' ;', ', ', ' ,', ' "', '" ', " '", "' ", " (", " )", "( ", ") ", " =", "= "] as $search) {
             $str = str_replace($search, trim($search), $str);
         }
+        $str = str_replace(' and(', ' and (', $str);
         return trim($str);
     }
 
