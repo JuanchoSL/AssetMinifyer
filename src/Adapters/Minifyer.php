@@ -31,7 +31,7 @@ class Minifyer
 
     public function addFile(string $file): self
     {
-        if (!file_exists($file)) {
+        if (filter_var($file, FILTER_VALIDATE_URL) === false && !file_exists($file)) {
             throw new NotFoundException("The file '{$file}' does not exists");
         }
         $content = file_get_contents($file);
