@@ -6,20 +6,20 @@ Simple library in order to minify js and css files used as assets into web proje
 ## How to use
 
 ### Directly to driver
-```
+```php
 use JuanchoSL\AssetMinifyer\Drivers\JSMin;
 
 $minifyed_content = JSMin::minify($js_code);
 ```
 or
-```
+```php
 use JuanchoSL\AssetMinifyer\Drivers\CSSMin;
 
 $minifyed_content = CSSMin::minify($css_code);
 ```
 
 ### Use Adapter for contents
-```
+```php
 use JuanchoSL\AssetMinifyer\Adapters\Minifyer;
 
 $minifyer = new Minifyer();
@@ -29,7 +29,7 @@ $css_minifyed = $minifyer->cleanCss($css_code);
 
 ### Use Adapter for some files 
 The files contents will minifyed and concatenated. Do not use for distinct file types.
-```
+```php
 use JuanchoSL\AssetMinifyer\Adapters\Minifyer;
 
 $minifyer = new Minifyer();
