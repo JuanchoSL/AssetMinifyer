@@ -9,13 +9,6 @@ use JuanchoSL\AssetMinifyer\Contracts\MinifyerInterface;
 class CSSMin implements MinifyerInterface
 {
 
-    protected string $input;
-
-    public function __construct(string $input)
-    {
-        $this->input = $input;
-    }
-
     /**
      * Elimina los comentarios de una cadena, que puede ser código php
      * @param string $str Cadena a ser limpiada
@@ -56,9 +49,9 @@ class CSSMin implements MinifyerInterface
         return trim($str);
     }
 
-    public function min(): string
+    public function min(string $content): string
     {
-        $content = $this->input;
+        //$content = $this->input;
         $content = $this->removeComments($content);
         $content = $this->removeEndLines($content);
         $content = $this->removeExtraSpaces($content);
@@ -67,8 +60,8 @@ class CSSMin implements MinifyerInterface
 
     public static function minify(string $content): string
     {
-        $obj = new CSSMin($content);
-        return $obj->min();
+        $obj = new CSSMin();
+        return $obj->min($content);
     }
 
 }
