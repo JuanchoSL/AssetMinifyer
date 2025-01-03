@@ -26,6 +26,7 @@ class Minifyer
 
     public function getContent(): string
     {
+        //trigger_error("This adapter is deprecated, use facade instead", E_USER_DEPRECATED);
         return $this->content;
     }
 

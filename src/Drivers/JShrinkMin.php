@@ -14,7 +14,7 @@ class JShrinkMin extends AbstractMin implements MinifyerInterface
     {
         $content = Minifier::minify($content);
         $content = $this->removeComments($content);
-        //$content = $this->removeEndLines($content);
+        $content = $this->removeEndLines($content);
         //$content = $this->removeExtraSpaces($content);
         return $content;
     }

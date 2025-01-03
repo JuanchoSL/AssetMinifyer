@@ -1,12 +1,20 @@
 <?php
 
-namespace JuanchoSL\AssetMinifyer\Tests\Unit;
+namespace JuanchoSL\AssetMinifyer\Tests\Functional;
 
 use JuanchoSL\AssetMinifyer\Drivers\CSSMin;
+use JuanchoSL\AssetMinifyer\Facades\Minifier;
 use PHPUnit\Framework\TestCase;
 
-class CssMinifyerTest extends TestCase
+class CssFacadeTest extends TestCase
 {
+
+    protected $minifier;
+
+    protected function setUp(): void
+    {
+        $this->minifier = new Minifier(new CSSMin());
+    }
     public function testMinifier()
     {
         $css = "
@@ -14,7 +22,7 @@ class CssMinifyerTest extends TestCase
             color: black;
         }
         ";
-        $content = CSSMin::minify($css);
+        $content = (string) $this->minifier->addContent($css);
         $this->assertLessThan(strlen($css), strlen($content));
     }
     public function testRemoveLineComments()
@@ -25,7 +33,7 @@ class CssMinifyerTest extends TestCase
             color: black;
         }
         ";
-        $content = CSSMin::minify($css);
+        $content = (string) $this->minifier->addContent($css);
         $this->assertStringNotContainsString('\//reset', $content);
     }
     public function testRemoveLinesComments()
@@ -36,7 +44,7 @@ class CssMinifyerTest extends TestCase
             color: black;
         }
         ";
-        $content = CSSMin::minify($css);
+        $content = (string) $this->minifier->addContent($css);
         $this->assertStringNotContainsString('\/* reset *\/', $content);
     }
     public function testRemoveSpaces()
@@ -46,7 +54,7 @@ class CssMinifyerTest extends TestCase
             color: black;
         }
         ";
-        $content = CSSMin::minify($css);
+        $content = (string) $this->minifier->addContent($css);
         $this->assertStringNotContainsString(': ', $content);
     }
     public function testRemoveExtraSpaces()
@@ -56,7 +64,7 @@ class CssMinifyerTest extends TestCase
             color: black;
         }
         ";
-        $content = CSSMin::minify($css);
+        $content = (string) $this->minifier->addContent($css);
         $this->assertStringNotContainsString('  ', $content);
     }
 }
